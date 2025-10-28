@@ -1,2 +1,2 @@
 # Image-Gallery
- Image Gallery Assignment for Battlebucks
+ Image Gallery App
