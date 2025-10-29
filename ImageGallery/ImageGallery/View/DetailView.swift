@@ -19,6 +19,7 @@ struct DetailView: View {
         Color.white,
         Color.orange.opacity(0.3)
     ]
+    @State var isIpad = UIDevice.current.userInterfaceIdiom == .pad
 }
 
 // MARK: - Body
@@ -70,8 +71,9 @@ extension DetailView{
                         AutoRetryImage(photoID: photos[index].id, width: 1024, height: 1024)
                     }
                     Text("\(AppStrings.detailViewImageTitle)\(photos[index].author)")
+                        .font(.system(size: isIpad ? 28 : 14))
                 }
-                .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600 : 300)
+                .frame(height: isIpad ? 600 : 300)
             }
             .tag(index)
             .padding()

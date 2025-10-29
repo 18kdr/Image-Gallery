@@ -13,9 +13,11 @@ struct LaunchView: View {
     @State private var showButton = false
     @State private var navigationVar = false
     @StateObject private var viewModel = ImageGalleryViewModel()
+    @State var isIpad = UIDevice.current.userInterfaceIdiom == .pad
     let backgroundColor : [Color] = [Color.yellow.opacity(0.3), // Light blue
         Color.white,
         Color.yellow.opacity(0.3)]  // Light blue
+    
 }
 
 // MARK: - Body
@@ -57,12 +59,12 @@ extension LaunchView{
             VStack{
                 Image("Image")
                     .resizable()
-                    .frame(width: 100, height: 100)
+                    .frame(width: isIpad ? 200 : 100, height: isIpad ? 200 : 100)
                     .cornerRadius(15)
             }
             .animation(.bouncy(extraBounce: 0.5), value: showButton)
             Text(displayedText)
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                .font(.system(size: isIpad ? 40 : 30,weight: .bold))
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
             if showButton {
@@ -70,8 +72,7 @@ extension LaunchView{
                     navigationVar = true
                 } label: {
                     Text(AppStrings.clickMeBtn)
-                        .font(.headline)
-                        .fontWeight(.semibold)
+                        .font(.system(size: isIpad ? 30 : 20,weight: .bold))
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.black)
